@@ -48,7 +48,7 @@ const Fib = () => {
 				<input
 					type="text"
 					placeholder="Enter your Index"
-					onChange={input.index}
+					onChange={handleOnChange}
 					id="index"
 				/>
 				<button>Submit</button>

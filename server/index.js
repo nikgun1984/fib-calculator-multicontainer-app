@@ -8,8 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Postgres Client
-
+// Postgres Client Setup
 const { Pool } = require("pg");
 const pgClient = new Pool({
 	user: keys.pgUser,
@@ -19,11 +18,11 @@ const pgClient = new Pool({
 	port: keys.pgPort,
 });
 
-pgClient.on((error) => () => console.log("Lost PG Connection..."));
-
-pgClient
-	.query("CREATE TABLE IF NOT EXISTS values (number INT)")
-	.catch((err) => console.log(err));
+pgClient.on("connect", (client) => {
+	client
+		.query("CREATE TABLE IF NOT EXISTS values (number INT)")
+		.catch((err) => console.error(err));
+});
 
 // Redis Client Setup
 
