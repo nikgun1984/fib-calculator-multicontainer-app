@@ -6,6 +6,7 @@ before_install:
   - docker build -t nickgun1984/fib-calculator-multicontainer-app -f ./client/Dockerfile.dev ./client
 
 script:
+  - echo 'hello world'
   - docker run -e CI=true nikgun1984/fib-calculator-multicontainer-app npm run test
 
 after_success:
